@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgoutside.modules.inclusive.mapper.InclusiveEquickloanMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dgoutside.modules.inclusive.entity.InclusiveEquickloan">
+        <id column="custname" property="custname" />
+        <result column="marketcode" property="marketcode" />
+        <result column="productname" property="productname" />
+        <result column="housename" property="housename" />
+        <result column="equickloanbalance" property="equickloanbalance" />
+        <result column="doename" property="doename" />
+        <result column="estateno" property="estateno" />
+        <result column="buybackflag" property="buybackflag" />
+        <result column="equickmemo" property="equickmemo" />
+        <result column="indate" property="indate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        marketcode, productname, custname, housename, equickloanbalance, doename, estateno, buybackflag, equickmemo, indate
+    </sql>
+
+</mapper>

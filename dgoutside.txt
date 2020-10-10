@@ -1,0 +1,59 @@
+DROP TABLE IF EXISTS `inclusive_equickloan`;
+CREATE TABLE `inclusive_equickloan` (   
+   marketcode  varchar(15),
+   productname varchar(50),    -- 产品名称
+   custname varchar(100),  -- 客户姓名
+   housename varchar(200),   -- 楼盘名称
+   equickloanbalance varchar(20),  -- 贷款金额
+   doename  varchar(200),   -- 经营实体名称
+   estateno  varchar(50),   -- 不动产权证号码
+   buybackflag   varchar(5),     --  是否需要赎楼
+   equickmemo varchar(1024),  -- e抵快贷备注
+   indate varchar(30), 
+   PRIMARY KEY (custname,housename,indate)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `inclusive_corploan`;
+CREATE TABLE `inclusive_corploan` (   
+   marketcode  varchar(15),
+   productname varchar(50),    -- 产品名称
+   corpname varchar(100),  -- 企业名称
+   loantype  varchar(50),  -- 贷款品种
+   corploanbalance varchar(20),  -- 贷款金额
+   loanstyle varchar(10),  -- 贷款形式
+   plandate   varchar(20),  -- 计划上会日期
+   corpmemo    varchar(1024),  
+   indate varchar(30), 
+   PRIMARY KEY (corpname ,loantype,indate)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `inclusive_housename`;
+CREATE TABLE `inclusive_housename` (   
+   housename varchar(200),   
+   PRIMARY KEY (housename)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `inclusive_manager`;
+CREATE TABLE `inclusive_manager` (   
+   branchname  varchar(20),
+   branchcode  varchar(10),
+   networkname  varchar(20),
+   networkcode  varchar(10),
+   name varchar(30),
+   marketcode varchar(20),
+   PRIMARY KEY (marketcode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `dgoutside`.`t_sys_role_menu`(`id`, `role_id`, `menu_id`, `gmt_create`, `gmt_modified`) VALUES (1727, 2, 96, NULL, NULL);
+INSERT INTO `dgoutside`.`t_sys_role_menu`(`id`, `role_id`, `menu_id`, `gmt_create`, `gmt_modified`) VALUES (1728, 1, 96, NULL, NULL);
+INSERT INTO `dgoutside`.`t_sys_menu`(`id`, `parent_id`, `url`, `resources`, `title`, `level`, `sort_no`, `icon`, `type`, `remarks`, `gmt_create`, `gmt_modified`) VALUES (95, '94', '/inclusive/inclusiveQuery', 'eQuickLoan', 'e抵快贷', 2, 1, 'my-sysmenu', 'menu', NULL, '2020-04-20 10:27:35', '2020-04-20 10:27:35');
+INSERT INTO `dgoutside`.`t_sys_menu`(`id`, `parent_id`, `url`, `resources`, `title`, `level`, `sort_no`, `icon`, `type`, `remarks`, `gmt_create`, `gmt_modified`) VALUES (96, '94', '/inclusive/inclusiveQuery', 'corpLoan', '小企业法人贷款', 2, 2, 'my-sysmenu', 'menu', NULL, '2020-04-20 10:27:35', '2020-04-20 10:27:35');
+INSERT INTO `dgoutside`.`t_sys_role_menu`(`id`, `role_id`, `menu_id`, `gmt_create`, `gmt_modified`) VALUES (1682, 1, 94, '2020-04-22 01:50:16', '2020-04-22 01:50:16');
+INSERT INTO `dgoutside`.`t_sys_role_menu`(`id`, `role_id`, `menu_id`, `gmt_create`, `gmt_modified`) VALUES (1683, 1, 95, '2020-04-22 01:50:16', '2020-04-22 01:50:16');
+
+INSERT INTO `dgoutside`.`t_sys_menu`(`id`, `parent_id`, `url`, `resources`, `title`, `level`, `sort_no`, `icon`, `type`, `remarks`, `gmt_create`, `gmt_modified`) VALUES (97, '94', '/inclusive/inclusiveQuery', 'inclusiveagrs', '参数管理', 2, 3, 'my-sysmenu', 'menu', NULL, '2020-04-20 10:27:35', '2020-04-20 10:27:35');
+
+
+
+
