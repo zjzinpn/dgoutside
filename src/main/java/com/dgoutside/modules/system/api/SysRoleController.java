@@ -1,6 +1,6 @@
 package com.dgoutside.modules.system.api;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgoutside.modules.common.api.BaseController;
 import com.dgoutside.modules.common.dto.output.ApiResult;
 import com.dgoutside.modules.system.dto.input.RoleQueryPara;
@@ -52,21 +52,21 @@ public class SysRoleController extends BaseController {
     @PostMapping(value = "/saveOrUpdate", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "保存或更新角色", httpMethod = "POST", response = ApiResult.class)
     public ApiResult saveOrUpdate(@RequestBody @Validated Role input) {
-        Integer id = roleService.save(input);
+        Boolean id = roleService.save(input);
         return ApiResult.ok("保存角色成功", id);
     }
 
     @PostMapping(value = "/delete", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "删除角色 ", httpMethod = "POST", response = ApiResult.class)
     public ApiResult delete(@RequestBody RoleQueryPara input) {
-        roleService.deleteById(input.getId());
+        roleService.removeById(input.getId());
         return ApiResult.ok("删除角色成功");
     }
 
     @PostMapping(value = "/detail", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "获取角色信息", httpMethod = "POST", response = ApiResult.class)
     public ApiResult detail(@RequestBody RoleQueryPara input) {
-        Role entity = roleService.selectById(input.getId());
+        Role entity = roleService.getById(input.getId());
         return ApiResult.ok("获取角色信息成功", entity);
     }
 

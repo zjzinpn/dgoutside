@@ -1,7 +1,8 @@
 package com.dgoutside.modules.system.service.impl;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dgoutside.modules.system.dto.input.UserRoleQueryPara;
 import com.dgoutside.modules.system.entity.UserRole;
 import com.dgoutside.modules.system.mapper.UserRoleMapper;
@@ -26,10 +27,10 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
     @Autowired
     UserRoleMapper userRoleMapper;
 
-    @Override
-    public void listPage(Page<UserRole> page, UserRoleQueryPara filter) {
-        page.setRecords(userRoleMapper.selectUserRoles(page, filter));
-    }
+//    @Override
+//    public void listPage(Page<UserRole> page, UserRoleQueryPara filter) {
+//        page.setRecords(userRoleMapper.selectUserRoles(page, filter));
+//    }
 
     @Override
     public List<UserRole> list(UserRoleQueryPara filter) {
@@ -37,13 +38,23 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
     }
 
     @Override
-    public Integer save(UserRole para) {
+    public void listPage(Page<UserRole> page, UserRoleQueryPara filter) {
+//        QueryWrapper<UserRole> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("id", filter.getId());
+//        queryWrapper.eq("role_id", filter.getRoleId());
+//        queryWrapper.orderByDesc("id");
+//        userRoleMapper.selectPage(page, queryWrapper);
+        page.setRecords(userRoleMapper.selectUserRoles(page, filter));
+    }
+
+    @Override
+    public boolean save(UserRole para) {
         if (para.getId()!=null) {
             userRoleMapper.updateById(para);
         } else {
             userRoleMapper.insert(para);
         }
-        return para.getId();
+        return para.getId() == null;
     }
 
     @Override

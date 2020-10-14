@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dgoutside.modules.system.entity.RoleMenu;
 import com.dgoutside.modules.system.dto.input.RoleMenuQueryPara;
 
@@ -28,8 +28,9 @@ public interface IRoleMenuService extends IService<RoleMenu> {
      * 保存系统管理 - 角色-菜单关联表
      *
      * @param input
+     * @return
      */
-    Integer save(RoleMenu input);
+    boolean save(RoleMenu input);
 
     /**
      * 系统管理 - 角色-菜单关联表 列表

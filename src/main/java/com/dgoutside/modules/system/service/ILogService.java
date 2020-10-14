@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dgoutside.modules.system.entity.SysLog;
 import com.dgoutside.modules.system.dto.input.LogQueryPara;
 
@@ -28,8 +28,9 @@ public interface ILogService extends IService<SysLog> {
      * 保存系统管理 - 日志表
      *
      * @param input
+     * @return
      */
-    Integer save(SysLog input);
+    boolean save(SysLog input);
 
     /**
      * 系统管理 - 日志表列表

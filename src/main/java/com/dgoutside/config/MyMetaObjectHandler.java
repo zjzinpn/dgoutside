@@ -1,6 +1,6 @@
 package com.dgoutside.config;
 
-import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.dgoutside.utils.DateTimeUtils;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Date;
  * @date: 2019/8/18 0018 1:46
  */
 @Component
-public class MyMetaObjectHandler extends MetaObjectHandler {
+public class MyMetaObjectHandler implements MetaObjectHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(MyMetaObjectHandler.class);
 

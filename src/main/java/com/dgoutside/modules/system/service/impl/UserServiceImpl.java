@@ -1,8 +1,9 @@
 package com.dgoutside.modules.system.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dgoutside.config.Constants;
 import com.dgoutside.modules.common.exception.MyException;
 import com.dgoutside.modules.system.dto.input.UserQueryPara;
@@ -46,10 +47,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     RoleMenuMapper roleMenuMapper;
 
-    @Override
-    public void listPage(Page<User> page, UserQueryPara filter) {
-        page.setRecords(userMapper.selectUsers(page, filter));
-    }
+//    @Override
+//    public void listPage(Page<User> page, UserQueryPara filter) {
+//        page.setRecords(userMapper.selectUsers(page, filter));
+//    }
 
     @Override
     public List<User> list(UserQueryPara filter) {
@@ -97,7 +98,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Integer save(User para) {
+    public void listPage(Page<User> page, UserQueryPara filter) {
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("id", filter.getId());
+//        queryWrapper.like("username", filter.getUsername());
+//        if (filter.getAccount() != null) {
+//            queryWrapper.eq("username", filter.getAccount());
+//        }
+//        queryWrapper.orderByDesc("id");
+//        userMapper.selectPage(page, queryWrapper);
+        page.setRecords(userMapper.selectUsers(page, filter));
+    }
+
+    @Override
+    public boolean save(User para) {
         if (para.getId()!=null) {
             User user = userMapper.selectById(para.getId());
             para.setPassword( PasswordUtils.encodePassword(para.getPwd(), user.getSalt()));
@@ -107,7 +121,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             para.setPassword( PasswordUtils.encodePassword(para.getPwd(), Constants.SALT));
             userMapper.insert(para);
         }
-        return para.getId();
+        return para.getId() == null;
     }
 
     @Override

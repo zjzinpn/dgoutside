@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dgoutside.modules.system.entity.Role;
 import com.dgoutside.modules.system.dto.input.RoleQueryPara;
 
@@ -28,8 +28,9 @@ public interface IRoleService extends IService<Role> {
      * 保存系统管理-角色表
      *
      * @param input
+     * @return
      */
-    Integer save(Role input);
+    boolean save(Role input);
 
     /**
      * 系统管理-角色表 列表

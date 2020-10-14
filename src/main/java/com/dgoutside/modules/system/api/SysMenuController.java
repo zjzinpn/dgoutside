@@ -2,8 +2,8 @@ package com.dgoutside.modules.system.api;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.dgoutside.modules.common.api.BaseController;
 import com.dgoutside.modules.common.dto.output.ApiResult;
@@ -67,7 +67,7 @@ public class SysMenuController extends BaseController {
     @PostMapping(value = "/save", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "保存菜单 ", httpMethod = "POST", response = ApiResult.class)
     public ApiResult save(@RequestBody @Validated Menu input) {
-        Integer id = menuService.save(input);
+        Boolean id = menuService.save(input);
         return ApiResult.ok("保存菜单成功", id);
     }
 
@@ -75,12 +75,13 @@ public class SysMenuController extends BaseController {
     @ApiOperation(value = "删除菜单", httpMethod = "POST", response = ApiResult.class)
     public ApiResult delete(@RequestBody MenuQueryPara input) {
         // 如果该菜单下存在子菜单，提示先删除子菜单
-        List<Menu> menuList = menuService.selectList(new EntityWrapper<Menu>().eq("parent_id", input.getId()));
+
+        List<Menu> menuList = menuService.list(new QueryWrapper<Menu>().eq("parent_id", input.getId()));
         if (!CollectionUtils.isEmpty(menuList)){
 //            menuList.forEach(e -> menuService.deleteById(e.getId()));
             return ApiResult.fail("该菜单下存在子菜单，请先删除子菜单！");
         }
-        menuService.deleteById(input.getId());
+        menuService.removeById(input.getId());
         return ApiResult.ok("删除菜单成功");
     }
 
@@ -104,7 +105,7 @@ public class SysMenuController extends BaseController {
     @PostMapping(value = "/getById", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "获取系统管理-菜单表 信息", httpMethod = "POST", response = ApiResult.class)
     public ApiResult getById(@RequestBody MenuQueryPara input) {
-        Menu entity = menuService.selectById(input.getId());
+        Menu entity = menuService.getById(input.getId());
         return ApiResult.ok("获取系统管理-菜单表 信息成功", entity);
     }
 

@@ -1,6 +1,6 @@
 package com.dgoutside.modules.system.api;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgoutside.modules.common.api.BaseController;
 import com.dgoutside.modules.common.dto.output.ApiResult;
 import com.dgoutside.modules.system.dto.input.UserRoleQueryPara;
@@ -51,21 +51,21 @@ public class SysUserRoleController extends BaseController {
     @PostMapping(value = "/saveOrUpdate", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "保存或更新系统管理 - 用户角色关联表 ", httpMethod = "POST", response = ApiResult.class)
     public ApiResult saveOrUpdate(@RequestBody UserRole input) {
-        Integer id = userRoleService.save(input);
+        Boolean id = userRoleService.save(input);
         return ApiResult.ok("保存系统管理 - 用户角色关联表 成功", id);
     }
 
     @PostMapping(value = "/delete", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "删除系统管理 - 用户角色关联表 ", httpMethod = "POST", response = ApiResult.class)
     public ApiResult delete(@RequestBody UserRoleQueryPara input) {
-        userRoleService.deleteById(input.getId());
+        userRoleService.removeById(input.getId());
         return ApiResult.ok("删除系统管理 - 用户角色关联表 成功");
     }
 
     @PostMapping(value = "/detail", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "根据ID获取系统管理 - 用户角色关联表 信息", httpMethod = "POST", response = ApiResult.class)
     public ApiResult detail(@RequestBody UserRoleQueryPara input) {
-        UserRole entity = userRoleService.selectById(input.getId());
+        UserRole entity = userRoleService.getById(input.getId());
         return ApiResult.ok("获取用户角色关联信息成功", entity);
     }
 

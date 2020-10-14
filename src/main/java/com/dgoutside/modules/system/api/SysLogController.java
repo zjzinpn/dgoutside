@@ -1,6 +1,6 @@
 package com.dgoutside.modules.system.api;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgoutside.modules.common.api.BaseController;
 import com.dgoutside.modules.common.dto.output.ApiResult;
 import com.dgoutside.modules.system.dto.input.LogQueryPara;

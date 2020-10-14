@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.mapper;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgoutside.modules.system.dto.input.RoleQueryPara;
 import com.dgoutside.modules.system.entity.Role;
 import org.apache.ibatis.annotations.Param;
@@ -23,7 +23,7 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @param filter
      * @return
      */
-    List<Role> selectRoles(Pagination page, @Param("filter") RoleQueryPara filter);
+    List<Role> selectRoles(Page page, @Param("filter") RoleQueryPara filter);
 
     /**
      * 列表

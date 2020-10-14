@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service.impl;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dgoutside.modules.system.dto.input.RoleMenuQueryPara;
 import com.dgoutside.modules.system.entity.RoleMenu;
 import com.dgoutside.modules.system.mapper.RoleMenuMapper;
@@ -55,12 +55,12 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     }
 
     @Override
-    public Integer save(RoleMenu para) {
+    public boolean save(RoleMenu para) {
         if (para.getId()!=null) {
             roleMenuMapper.updateById(para);
         } else {
             roleMenuMapper.insert(para);
         }
-        return para.getId();
+        return para.getId() == null;
     }
 }

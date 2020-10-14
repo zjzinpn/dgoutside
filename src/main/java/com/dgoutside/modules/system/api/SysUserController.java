@@ -2,7 +2,7 @@ package com.dgoutside.modules.system.api;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgoutside.modules.common.api.BaseController;
 import com.dgoutside.modules.common.dto.output.ApiResult;
 import com.dgoutside.modules.system.dto.input.UserQueryPara;
@@ -52,7 +52,7 @@ public class SysUserController extends BaseController {
     @PostMapping(value = "/treeUser", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "获取用户树", httpMethod = "POST", response = ApiResult.class)
     public ApiResult treeUser() {
-        List<User> list = userService.selectList(null);
+        List<User> list = userService.list();
         List<UserTreeNode> userTreeNodeList = new ArrayList<>();
         list.forEach(temp -> {
             UserTreeNode userTreeNode = new UserTreeNode();
@@ -76,7 +76,7 @@ public class SysUserController extends BaseController {
     @ApiOperation(value = "保存系统管理-用户基础信息表", httpMethod = "POST", response = ApiResult.class)
     // groups和默认校验同时应用 - 没有groups的属性和有groups的属性要想同时校验，则必须在value数组中同时指明，启动没有groups的属性通过Default.class来指定
     public ApiResult save(@RequestBody @Validated User input) {
-        Integer id = userService.save(input);
+        boolean id = userService.save(input);
         return ApiResult.ok("保存系统管理-用户基础信息表成功", id);
     }
 
@@ -90,14 +90,14 @@ public class SysUserController extends BaseController {
     @PostMapping(value = "/delete", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "删除系统管理-用户基础信息表", httpMethod = "POST", response = ApiResult.class)
     public ApiResult delete(@RequestBody UserQueryPara input) {
-        userService.deleteById(input.getId());
+        userService.removeById(input.getId());
         return ApiResult.ok("删除系统管理-用户基础信息表成功");
     }
 
     @PostMapping(value = "/getById", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "获取系统管理-用户基础信息表信息", httpMethod = "POST", response = ApiResult.class)
     public ApiResult getById(@RequestBody UserQueryPara input) {
-        User entity = userService.selectById(input.getId());
+        User entity = userService.getById(input.getId());
         return ApiResult.ok("获取系统管理-用户基础信息表信息成功", entity);
     }
 

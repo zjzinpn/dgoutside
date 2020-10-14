@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dgoutside.modules.system.dto.input.UserQueryPara;
 import com.dgoutside.modules.system.dto.model.UserInfoVO;
 import com.dgoutside.modules.system.entity.User;
@@ -28,10 +28,10 @@ public interface IUserService extends IService<User> {
     /**
      * 保存系统管理-用户基础信息表
      *
-     * @param input:
+     * @param input :
      * @return: java.lang.Integer
      */
-    Integer save(User input);
+    boolean save(User input);
 
     /**
      * 修改用户个人信息

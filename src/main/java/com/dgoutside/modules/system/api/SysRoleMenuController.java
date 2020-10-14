@@ -1,6 +1,6 @@
 package com.dgoutside.modules.system.api;
 
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dgoutside.modules.common.api.BaseController;
 import com.dgoutside.modules.common.dto.output.ApiResult;
 import com.dgoutside.modules.system.dto.input.RoleMenuQueryPara;
@@ -51,21 +51,21 @@ public class SysRoleMenuController extends BaseController {
     @PostMapping(value = "/saveOrUpdate", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "保存或更新系统管理 - 角色-菜单关联表 ", httpMethod = "POST", response = ApiResult.class)
     public ApiResult saveOrUpdate(@RequestBody RoleMenu input) {
-        Integer id = roleMenuService.save(input);
+        Boolean id = roleMenuService.save(input);
         return ApiResult.ok("保存系统管理 - 角色-菜单关联表 成功", id);
     }
 
     @PostMapping(value = "/delete", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "删除系统管理 - 角色-菜单关联表 ", httpMethod = "POST", response = ApiResult.class)
     public ApiResult delete(@RequestBody RoleMenuQueryPara input) {
-        roleMenuService.deleteById(input.getId());
+        roleMenuService.removeById(input.getId());
         return ApiResult.ok("删除系统管理 - 角色-菜单关联表 成功");
     }
 
     @PostMapping(value = "/detail", produces = "application/json;charset=utf-8")
     @ApiOperation(value = "根据ID获取系统管理 - 角色-菜单关联表 信息", httpMethod = "POST", response = ApiResult.class)
     public ApiResult detail(@RequestBody RoleMenuQueryPara input) {
-        RoleMenu entity = roleMenuService.selectById(input.getId());
+        RoleMenu entity = roleMenuService.getById(input.getId());
         return ApiResult.ok("根据ID获取系统管理 - 角色-菜单关联表 信息成功", entity);
     }
 

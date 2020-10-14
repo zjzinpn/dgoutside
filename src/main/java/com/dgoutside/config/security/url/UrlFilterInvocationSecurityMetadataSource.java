@@ -1,6 +1,6 @@
 package com.dgoutside.config.security.url;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dgoutside.config.Constants;
 import com.dgoutside.config.MyProperties;
 import com.dgoutside.modules.system.entity.Menu;
@@ -78,7 +78,8 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         for (Menu permission : permissionList) {
             // 获取该url所对应的权限
             if (("/api" + permission.getUrl()).equals(requestUrl)) {
-                List<RoleMenu> permissions = roleMenuMapper.selectList(new EntityWrapper<RoleMenu>().eq("menu_id", permission.getId()));
+
+                List<RoleMenu> permissions = roleMenuMapper.selectList(new QueryWrapper<RoleMenu>().eq("menu_id", permission.getId()));
                 List<String> roles = new LinkedList<>();
                 if (!CollectionUtils.isEmpty(permissions)){
                     permissions.forEach( e -> {

@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service.impl;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dgoutside.modules.system.dto.input.MenuQueryPara;
 import com.dgoutside.modules.system.entity.Menu;
 import com.dgoutside.modules.system.mapper.MenuMapper;
@@ -41,13 +41,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public Integer save(Menu para) {
+    public boolean save(Menu para) {
         if (para.getId()!=null) {
             menuMapper.updateById(para);
         } else {
             menuMapper.insert(para);
         }
-        return para.getId();
+        return para.getId() == null;
     }
 
 }

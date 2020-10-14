@@ -14,7 +14,7 @@ spring:
     active: dev
   # 配置数据源
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/dgoutside?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/hesuan?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     name: xiao-xiao-su
     username: root
     password: Lxy2240

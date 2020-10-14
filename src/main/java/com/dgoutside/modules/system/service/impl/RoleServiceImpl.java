@@ -1,11 +1,11 @@
 package com.dgoutside.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dgoutside.modules.system.entity.Role;
 import com.dgoutside.modules.system.dto.input.RoleQueryPara;
 import com.dgoutside.modules.system.mapper.RoleMapper;
 import com.dgoutside.modules.system.service.IRoleService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +25,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Autowired
     RoleMapper roleMapper;
 
-    @Override
-    public void listPage(Page<Role> page, RoleQueryPara filter) {
-        page.setRecords(roleMapper.selectRoles(page, filter));
-    }
+//    @Override
+//    public void listPage(Page<Role> page, RoleQueryPara filter) {
+//        page.setRecords(roleMapper.selectRoles(page, filter));
+//    }
 
     @Override
     public List<Role> list(RoleQueryPara filter) {
@@ -36,13 +36,18 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public Integer save(Role para) {
+    public void listPage(Page<Role> page, RoleQueryPara filter) {
+        page.setRecords(roleMapper.selectRoles(page, filter));
+    }
+
+    @Override
+    public boolean save(Role para) {
         if (para.getId()!=null) {
             roleMapper.updateById(para);
         } else {
             roleMapper.insert(para);
         }
-        return para.getId();
+        return para.getId() == null;
     }
 
 }

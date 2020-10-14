@@ -1,7 +1,7 @@
 package com.dgoutside.modules.system.service;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.dgoutside.modules.system.dto.input.UserRoleQueryPara;
 import com.dgoutside.modules.system.entity.UserRole;
 
@@ -28,8 +28,9 @@ public interface IUserRoleService extends IService<UserRole> {
      * 保存系统管理 - 用户角色关联表
      *
      * @param input
+     * @return
      */
-    Integer save(UserRole input);
+    boolean save(UserRole input);
 
     /**
      * 系统管理 - 用户角色关联表 列表

@@ -1,17 +1,16 @@
 package com.dgoutside.modules.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dgoutside.modules.system.entity.SysLog;
 import com.dgoutside.modules.system.dto.input.LogQueryPara;
 import com.dgoutside.modules.system.mapper.LogMapper;
 import com.dgoutside.modules.system.service.ILogService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p> 系统管理 - 日志表 服务实现类 </p>
@@ -43,13 +42,13 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements IL
     }
 
     @Override
-    public Integer save(SysLog para) {
+    public boolean save(SysLog para) {
         if (para.getId()!=null) {
             logMapper.updateById(para);
         } else {
             logMapper.insert(para);
         }
-        return para.getId();
+        return para.getId() == null;
     }
 
 }

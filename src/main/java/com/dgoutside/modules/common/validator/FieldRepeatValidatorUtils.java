@@ -1,7 +1,7 @@
 package com.dgoutside.modules.common.validator;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dgoutside.modules.common.entity.BaseEntity;
 import com.dgoutside.modules.common.exception.MyException;
 import io.swagger.annotations.ApiModelProperty;
@@ -66,7 +66,9 @@ public class FieldRepeatValidatorUtils {
         // 工厂模式 + ar动态语法
         BaseEntity entity = (BaseEntity) object;
 //        List list = entity.selectPage( new Page<>( 1,1 ), new EntityWrapper().eq( field, fieldValue ) ).getRecords();
-        List list = entity.selectList( new EntityWrapper().eq( db_field, fieldValue ) );
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq( db_field, fieldValue );
+        List list = entity.selectList(queryWrapper);
         // 如果数据重复返回false -> 再返回自定义错误消息到前端
         if ( idValue == null ){
             if ( !CollectionUtils.isEmpty( list ) ){
